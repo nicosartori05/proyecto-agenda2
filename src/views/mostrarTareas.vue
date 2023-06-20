@@ -110,6 +110,9 @@
 #taskList ul li{
     margin: 1rem;
 }
+.v-application ol, .v-application ul {
+    padding-left: 0;
+}
 .card{
     display: flex;
     flex-direction: column;
