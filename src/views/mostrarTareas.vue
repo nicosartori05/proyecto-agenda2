@@ -7,7 +7,8 @@
     <div id="taskList">
       <ul>
         <li v-for="(item, index) in lista" :key="index" class="card">
-          <p>{{ index }}: {{ item.fecha }}</p>
+            <p>{{ index + 1 }}: {{ item.fecha }}</p>
+
           <p>
             <span class="nombrePost">{{ item.responsable }}</span>
           </p>
@@ -69,7 +70,8 @@
             :key="indexT"
             class="cardTerminadas"
           >
-            <p>{{ indexT }}: {{ itemT.fecha }}</p>
+          <p>{{ indexT + 1 }}: {{ itemT.fecha }}</p>
+
             <p>
               <span class="nombrePost">{{ itemT.responsable }}</span>
             </p>
