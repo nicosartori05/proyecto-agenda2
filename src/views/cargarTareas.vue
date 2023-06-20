@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="cargarTareas">
     <h2>Cargar listado de tareas</h2>
     <p>
       Tener en cuenta que el nombre del responsable solo admite 10 caracteres y
@@ -8,8 +8,8 @@
     <!-- agregar formulario de carga de tareas -->
     <v-form ref="form" v-model="valid" @submit.prevent>
       <v-container>
-        <v-row>
-          <v-col cols="12" md="4">
+        <!-- <v-row>
+          <v-col cols="12" md="4"> -->
             <v-text-field
               v-model="tareaObj.responsable"
               :rules="responsableRules"
@@ -17,16 +17,16 @@
               label="Responsable"
               required
             ></v-text-field>
-          </v-col>
-          <v-col cols="12" md="4">
+          <!-- </v-col>
+          <v-col cols="12" md="4"> -->
             <v-textarea
               v-model="tareaObj.tarea"
               :rules="tareaRules"
               name="input-7-4"
               label="Tarea"
             ></v-textarea>
-          </v-col>
-        </v-row>
+          <!-- </v-col>
+        </v-row> -->
       </v-container>
       <v-btn
         class="mx-2"
@@ -115,3 +115,10 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+#cargarTareas{
+  padding: 1rem;
+}
+</style>

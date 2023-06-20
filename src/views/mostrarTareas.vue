@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div id="mostrarTareas">
       <h2>Mostrar listado de tareas</h2>
+      <p>En esta seccion, vas a visualizar las tareas pendientes y las finalizadas.</p>
       <div id="taskList">
         <ul>
           <li v-for="(item, index) in lista" :key="index" class="card">
@@ -95,6 +96,9 @@
   
 
 <style scoped>
+#mostrarTareas{
+    padding: 1rem;
+}
 #taskList ul{
     list-style-type: none;
     display: flex;

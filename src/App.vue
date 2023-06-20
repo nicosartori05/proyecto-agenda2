@@ -30,15 +30,21 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app id="menu">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Mi Agenda</v-toolbar-title>
+      <v-toolbar-title><h1>Mi Agenda</h1></v-toolbar-title>
     </v-app-bar>
 
     <v-main>
       <!-- Contenido principal de la página -->
-      <router-view></router-view>
+        <router-view></router-view>
     </v-main>
+
+      <v-footer padless>
+        <v-col class="text-center" cols="12">
+          {{ new Date().getFullYear() }} — <strong>Mi Agenda</strong>
+        </v-col>
+      </v-footer>
   </v-app>
 </template>
 
@@ -49,7 +55,11 @@ export default {
 </script>
 
 <style scoped>
+
 .v-main {
-  margin: 1rem;
+  margin: 0;
+}
+.v-footer{
+  margin-top: 1rem;
 }
 </style>
