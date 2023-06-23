@@ -5,28 +5,36 @@
       Tener en cuenta que el nombre del responsable solo admite 10 caracteres y
       el campo de tarea un máximo de 100.
     </p>
-    <!-- agregar formulario de carga de tareas -->
+
     <v-form ref="form" v-model="valid" @submit.prevent>
       <v-container>
-        <!-- <v-row>
-          <v-col cols="12" md="4"> -->
-            <v-text-field
-              v-model="tareaObj.responsable"
-              :rules="responsableRules"
-              :counter="10"
-              label="Responsable"
-              required
-            ></v-text-field>
-          <!-- </v-col>
-          <v-col cols="12" md="4"> -->
-            <v-textarea
-              v-model="tareaObj.tarea"
-              :rules="tareaRules"
-              name="input-7-4"
-              label="Tarea"
-            ></v-textarea>
-          <!-- </v-col>
-        </v-row> -->
+        <v-text-field
+          v-model="tareaObj.responsable"
+          :rules="responsableRules"
+          :counter="10"
+          label="Responsable"
+          required
+        ></v-text-field>
+
+        <v-textarea
+          v-model="tareaObj.tarea"
+          :rules="tareaRules"
+          name="input-7-4"
+          label="Tarea"
+        ></v-textarea>
+
+        <v-select
+        v-model="tareaObj.prioridad"
+        :rules="prioridadRules"
+          clearable
+          chips
+          label="Prioridad"
+          :items="[
+            'Alto',
+            'Medio',
+            'bajo',
+          ]"
+        ></v-select>
       </v-container>
       <v-btn
         class="mx-2"
@@ -59,6 +67,7 @@ export default {
         responsable: "",
         tarea: "",
         fecha: "",
+        prioridad:""
       },
       responsableRules: [
         (v) => !!v || "El nombre es requerido",
@@ -69,6 +78,9 @@ export default {
         (v) => !!v || "El campo es requerido",
         (v) =>
           v.length <= 100 || "El campo debe tener como máximo 100 caracteres",
+      ],
+      prioridadRules: [
+        (v) => !!v || "El campo es requerido",
       ],
     };
   },
@@ -86,6 +98,7 @@ export default {
             fecha: this.tareaObj.fecha,
             responsable: this.tareaObj.responsable,
             tarea: this.tareaObj.tarea,
+            prioridad: this.tareaObj.prioridad,
           };
           // Guardamos en un nuevo objeto toda la información para luego pushearla al array correspondiente
 
@@ -98,7 +111,7 @@ export default {
           // Luego de meter en el array lista lo que teníamos en localStorage, le pusheamos el objeto que habíamos guardado anteriormente (tareaGuardada)
           localStorage.setItem("work", JSON.stringify(lista));
           // Para finalizar, sobreescribimos la key "work" con la lista actualizada y la guardamos en localStorage.
-          this.tareaObj = { fecha: "", responsable: "", tarea: "" };
+          this.tareaObj = { fecha: "", responsable: "", tarea: "", prioridad: ""};
           // Igualamos todas las propiedades del formulario a una cadena vacía
           this.tareaGuardada = true;
           setTimeout(() => {
@@ -116,9 +129,8 @@ export default {
 };
 </script>
 
-
 <style scoped>
-#cargarTareas{
+#cargarTareas {
   padding: 1rem;
 }
 </style>

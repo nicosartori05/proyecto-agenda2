@@ -12,6 +12,7 @@
           <p>
             <span class="nombrePost">{{ item.responsable }}</span>
           </p>
+          <p>Prioridad: {{ item.prioridad }}</p>
           <p class="Orden">{{ item.tarea }}</p>
 
           <button class="botonFinalizar" @click="finalizar(item, index)">
@@ -177,178 +178,6 @@ export default {
 </script>
 
 
-<!-- <template>
-  <div id="mostrarTareas">
-    <h2>Mostrar listado de tareas</h2>
-    <p>
-      En esta seccion, vas a visualizar las tareas pendientes y las finalizadas.
-    </p>
-    <div id="taskList">
-      <ul>
-        <li v-for="(item, index) in lista" :key="index" class="card">
-          <p>{{ index }}: {{ item.fecha }}</p>
-          <p>
-            <span class="nombrePost">{{ item.responsable }}</span>
-          </p>
-          <p class="Orden">{{ item.tarea }}</p>
-
-          <button class="botonFinalizar" @click="finalizar(item, index)">
-            <v-btn class="mx-2" fab dark color="indigo">
-              <v-icon dark> mdi-check </v-icon>
-            </v-btn>
-          </button>
-
-          <button class="botonBorrar">
-            <v-row justify="center">
-                <v-btn
-                  class="mx-2"
-                  fab
-                  dark
-                  small
-                  color="primary"
-                  @click="dialog = true"
-                >
-                  <v-icon dark> mdi-delete </v-icon>
-                </v-btn>
-                <v-dialog v-model="dialog" max-width="290">
-                  <v-card>
-                    <v-card-title class="text-h5">
-                      Esta seguro que desea eliminar la tarea?
-                    </v-card-title>
-
-                    <v-card-text>
-                      Al eliminar la tarea, esta se borrara del sistema de
-                      manera permanente.
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                      >
-                        Cancelar
-                      </v-btn>
-
-                      <v-btn color="green darken-1" text @click="dialog = true  && borrar(index)">
-                        Si, acepto
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
-          </button>
-        </li>
-      </ul>
-
-      <h4>Tareas Finalizadas</h4>
-      <p v-if="contador == 0">No hay tareas finalizadas para mostrar</p>
-      <div v-else-if="contador > 0">
-        <h5>cantidad de tareas finalizadas: {{ contador }}</h5>
-        <ul>
-          <li
-            v-for="(itemT, indexT) in listaTerminadas"
-            :key="indexT"
-            class="cardTerminadas"
-          >
-            <p>{{ indexT }}: {{ itemT.fecha }}</p>
-            <p>
-              <span class="nombrePost">{{ itemT.responsable }}</span>
-            </p>
-            <p class="Orden">{{ itemT.tarea }}</p>
-
-            <button class="botonBorrar">
-              <v-row justify="center">
-                <v-btn
-                  class="mx-2"
-                  fab
-                  dark
-                  small
-                  color="primary"
-                  @click.stop="dialog = true"
-                >
-                  <v-icon dark> mdi-delete </v-icon>
-                </v-btn>
-                <v-dialog v-model="dialog" max-width="290">
-                  <v-card>
-                    <v-card-title class="text-h5">
-                      Esta seguro que desea eliminar la tarea?
-                    </v-card-title>
-
-                    <v-card-text>
-                      Al eliminar la tarea, esta se borrara del sistema de
-                      manera permanente.
-                    </v-card-text>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                      >
-                        Cancelar
-                      </v-btn>
-
-                      <v-btn color="green darken-1" text @click="dialog = true && borrarFinalizar(itemT, indexT)">
-                        Si, acepto
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      contador: 0,
-      dialog: false,
-      lista: [],
-      listaTerminadas: [],
-    };
-  },
-  created() {
-    // Verificar si hay datos guardados en el LocalStorage
-    if (localStorage.work) {
-      this.lista = JSON.parse(localStorage.getItem("work"));
-    }
-    if (localStorage.workEnd) {
-      this.listaTerminadas = JSON.parse(localStorage.getItem("workEnd"));
-      this.contador = this.listaTerminadas.length;
-    }
-  },
-  methods: {
-    borrar: function (index) {
-            this.lista.splice(index, 1);
-            localStorage.setItem("work", JSON.stringify(this.lista));
-    },
-    finalizar: function (item, index) {
-      this.contador++;
-      this.listaTerminadas.push(item);
-      localStorage.setItem("workEnd", JSON.stringify(this.listaTerminadas));
-      this.lista.splice(index, 1);
-      localStorage.setItem("work", JSON.stringify(this.lista));
-    },
-    borrarFinalizar: function (item, index) {
-      this.listaTerminadas.splice(index, 1);
-      this.contador--;
-      localStorage.setItem("workEnd", JSON.stringify(this.listaTerminadas));
-    },
-  },
-};
-</script> -->
-
 <style scoped>
 #mostrarTareas {
   padding: 1rem;
@@ -428,10 +257,6 @@ export default {
   width: 300px;
   box-shadow: -1px 1px 3px 1px grey;
 }
-.card p,
-.cardTerminadas p {
-  margin-top: 0.5em;
-}
 
 #taskList h4 {
   background-color: black;
@@ -443,9 +268,9 @@ export default {
   align-items: center;
   justify-content: center;
 }
-#taskList p {
+/* #taskList p {
   margin-bottom: 2em;
-}
+} */
 h5 {
   text-align: center;
 }
